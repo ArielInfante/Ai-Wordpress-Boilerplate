@@ -1,0 +1,1 @@
+This is an updated Wordpress Boilerplate. It is a blank theme with minimum to no style included. Its a project started and could be customized to your liking.
