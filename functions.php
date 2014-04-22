@@ -153,9 +153,9 @@ add_action('wp_footer', 'add_google_analytics');
 *      Defines The Content Width
 *
 *************************************************/
-function the_favicon() { ?>
-    <link rel="shortcut icon" href="">
-<?php }
+function the_favicon() {
+    echo '<link rel="shortcut icon" type="image/x-icon" href="' . get_template_directory_uri() . '/favicon/favicon.ico" />';
+}
 add_action('wp_head', 'the_favicon');
 /*************************************************
 *
@@ -280,6 +280,7 @@ require_once('includes/php-browser-detection.php');
 *
 *      Highly Customizable How Wordpress Works - Removes unused dashboard widgets and others
 *      Uncomment the line below to enable remove.php - please know what you are doing by enabling it.
+*      If it is to complex you could use a plugin such as Adminimize or AG Custom Admin for simlar experience
 *
 *************************************************/
 //require_once('includes/remove.php');

@@ -23,12 +23,12 @@
 
 				<!--BEGIN: Post Meta Data-->
 				<footer class="post-meta-data">
-					<ul>
-						<li><?php the_time('M d, Y') ?> by <?php the_author(); ?></li>
-						<li class="add-comment"><?php comments_popup_link('Share Your Comments', '1 Comment', '% Comments'); ?></li>
-						<li><?php edit_post_link('[Edit]', '<small>', '</small>'); ?></li>
-						<li><?php the_tags('Tags: ', ', ', '<br />'); ?></li>
-					</ul>
+					<div><?php the_time('M d, Y') ?> by <?php the_author(); ?></div>
+					<div class="add-comment"><?php comments_popup_link('Share Your Comments', '1 Comment', '% Comments'); ?></div>
+					<div><?php edit_post_link('[Edit]', '<small>', '</small>'); ?></div>
+					<?php if(has_tags()) { ?>
+						<div><?php the_tags('Tags: ', ', ', '<br />'); ?></div>
+					<?php } ?>
 				</footer>
 				<!--END: Post Meta Data-->
 

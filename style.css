@@ -27,7 +27,7 @@ Author URI: www.arielinfante.com
 body { font-size: 14px; font-weight: 300; line-height: 1.5; font-family: 'Helvetica Neue', helvetica, sans-serif; }
 
 /*--- CODE ---*/
-code { background-color: #2A410B !important; font-family: 'Andale Mono', 'Lucida Console', "courier new", courier, monospace; background-color: #069; color: #FFF; padding: .5em; -moz-border-radius: 5px; -khtml-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; }
+code { background-color: #2A410B !important; font-family: monospace, 'Helvetica Neue', helvetica; background-color: #069; color: #FFF; padding: .5em; -moz-border-radius: 5px; -khtml-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; }
 pre code { line-height: 130%; display: block; padding: 1em; margin: 2em 0; overflow: auto; }
 pre { margin: 1em; }
 
@@ -37,22 +37,15 @@ pre { margin: 1em; }
 #content em { font-style: italic; }
 
 /* Page Nav */
-#page-nav a { float: right; padding: .5em 2em; margin: 1em; }
 
 /* Page */
-.page {}
 
 /* Posts */
-.post {}
 
 /* Single */
-.single-template {}
 
 
 /*--- SIDEBAR ~ MAIN ---*/
-
-
-/*--- SIDEBAR ~ FOOTER ---*/
 
 
 /*--- FOOTER ---*/
