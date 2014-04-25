@@ -154,7 +154,25 @@ add_action('wp_footer', 'add_google_analytics');
 *
 *************************************************/
 function the_favicon() {
-    echo '<link rel="shortcut icon" type="image/x-icon" href="' . get_template_directory_uri() . '/favicon/favicon.ico" />';
+    if(is_iphone() || is_ipad() || is_ipod()) {
+        //For rounded corners and reflective shine in Apple devices
+        echo '<link rel="apple-touch-icon" type="image/png" href="' . get_template_directory_uri() . '/favicon/favicon-reflective.png" />';
+        //Recommended basic size for Apple devices is 57x57 with 90 degree corners. Higher resolution is 114x114
+        echo '<link rel="apple-touch-icon-precomposed" type="image/png" href="' . get_template_directory_uri() . '/favicon/favicon-no-reflect.png" />';
+    }
+    if(is_ie() && get_browser_version() >= 9) {
+        // This is for Windows 8 which has tiles in the main menu 'TileColor' displays the background of the tile
+        echo '<meta name="msapplication-TileColor" content="#ddd">';
+        // 'TileImage' is the favicon/image on the tile to display your logo
+        echo '<meta name="msapplication-TileImage" content="' . get_template_directory_uri() . '/favicon/tileicon.png">';
+    } elseif( is_ie() && get_browser_version() <= 8) {
+        echo '<link rel="shortcut icon" type="image/x-icon" href="' . get_template_directory_uri() . '/favicon/favicon.ico" />';
+    }
+    if(is_firefox() || is_opera() || is_chrome() || is_safari()) {
+        echo '<link rel="shortcut icon" type="image/png" href="' . get_template_directory_uri() . '/favicon/favicon.png" />';
+    } else {
+        echo '<link rel="shortcut icon" type="image/x-icon" href="' . get_template_directory_uri() . '/favicon/favicon.ico" />';
+    }
 }
 add_action('wp_head', 'the_favicon');
 /*************************************************
