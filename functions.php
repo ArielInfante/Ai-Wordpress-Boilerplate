@@ -1,4 +1,12 @@
 <?php
+/*************************************************
+*
+*      Extends functions.php to checks which browser is currently being used
+*      If you do not want this function you could delete the line and also the files with 'browser-detection'
+*
+*************************************************/
+require_once('includes/php-browser-detection.php');
+
 // Hide Admin Bar(During Development)
 show_admin_bar( false );
 
@@ -67,10 +75,8 @@ if (function_exists('add_theme_support')) {
     add_theme_support('menus');
 }
 
-
 // Activates Featured Image function
 add_theme_support( 'post-thumbnails' );
-
 
 // Removes the automatic paragraph tags from the excerpt, we leave it on for the content and have a custom field you can use to turn it off on a page by page basis --> wpautop = false
 remove_filter('the_excerpt', 'wpautop');
@@ -140,6 +146,13 @@ if(!isset($content_width))
 
 /*************************************************
 *
+*      Adds a backup title to the website if no title is entered
+*
+*************************************************/
+function backup_title() {}
+add_filter('wp_title', 'backup_title');
+/*************************************************
+*
 *      Adds Google Analytics to the theme at the footer
 *
 *************************************************/
@@ -150,7 +163,19 @@ add_action('wp_footer', 'add_google_analytics');
 
 /*************************************************
 *
-*      Defines The Content Width
+*      Adds the viewport Meta tag to the website
+*
+*************************************************/
+function add_viewport() {
+    if(is_mobile() || is_android() || is_iphone() || is_ipad() || is_ipod()) {
+        echo '<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;" />';
+    }
+}
+add_action('wp_head', 'add_viewport');
+
+/*************************************************
+*
+*      Adds the Custom Favicon to the website
 *
 *************************************************/
 function the_favicon() {
@@ -165,16 +190,22 @@ function the_favicon() {
         echo '<meta name="msapplication-TileColor" content="#ddd">';
         // 'TileImage' is the favicon/image on the tile to display your logo
         echo '<meta name="msapplication-TileImage" content="' . get_template_directory_uri() . '/favicon/tileicon.png">';
+        // Display Favicon on the browser tab
+        echo '<link rel="shortcut icon" type="image/x-icon" href="' . get_template_directory_uri() . '/favicon/favicon.ico" />';
     } elseif( is_ie() && get_browser_version() <= 8) {
+        // Displays the favicon on older IE version without Meta Tags removing Tiles
         echo '<link rel="shortcut icon" type="image/x-icon" href="' . get_template_directory_uri() . '/favicon/favicon.ico" />';
     }
     if(is_firefox() || is_opera() || is_chrome() || is_safari()) {
+        // Displays favicon png format with modern browsers
         echo '<link rel="shortcut icon" type="image/png" href="' . get_template_directory_uri() . '/favicon/favicon.png" />';
     } else {
+        // Fallback to any other browser
         echo '<link rel="shortcut icon" type="image/x-icon" href="' . get_template_directory_uri() . '/favicon/favicon.ico" />';
     }
 }
 add_action('wp_head', 'the_favicon');
+
 /*************************************************
 *
 *      LOAD CSS FILES/ENQUEUE SCRIPT METHOD
@@ -185,6 +216,15 @@ function enqueue_css_sheets() {
     wp_register_style('aigrid', get_stylesheet_directory_uri() . '/css/aigrid.css', 'style');
     wp_enqueue_style('aireset');
     wp_enqueue_style('aigrid');
+
+    if(is_ie(7)) {
+        wp_register_style('ie7', get_stylesheet_directory_uri() . '/css/ie7.css', 'style');
+        wp_enqueue_style('ie7');
+    }
+    if(is_ie(8)) {
+        wp_register_style('ie8', get_stylesheet_directory_uri() . '/css/ie8.css', 'style');
+        wp_enqueue_style('ie8');
+    }
 }
 add_action('wp_enqueue_scripts', 'enqueue_css_sheets');
 
@@ -285,14 +325,6 @@ add_filter('login_redirect', 'admin_login_redirect', 10, 3);
 function the_custom_logo() {
     echo '<style type="text/css">#header-logo{background-image:url('.get_template_directory_uri().'/images/favicon/Name of file !important;}</style>';
 }
-
-/*************************************************
-*
-*      Extends functions.php to checks which browser is currently being used
-*      If you do not want this function you could delete the line and also the files with 'browser-detection'
-*
-*************************************************/
-require_once('includes/php-browser-detection.php');
 
 /*************************************************
 *

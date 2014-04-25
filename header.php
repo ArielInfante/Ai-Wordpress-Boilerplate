@@ -1,10 +1,3 @@
-<?php
-	// store a few user agent variables
-	$iphone = strpos($_SERVER['HTTP_USER_AGENT'],"iPhone");
-	$ipad = strpos($_SERVER['HTTP_USER_AGENT'],"iPad");
-	$android = strpos($_SERVER['HTTP_USER_AGENT'],"Android");
-?>
-
 <!DOCTYPE html>
 
 <html <?php language_attributes(); ?> class="no-js" xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:og="http://ogp.me/ns#">
@@ -20,24 +13,10 @@
 
 	<title><?php wp_title(''); ?></title>
 
-	<!-- favicon & other link Tags -->
-	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-	<link rel="icon" type="image/png" href="/favicon.ico" />
-	<link rel="apple-touch-icon" href="/images/custom_icon.png"/><!-- 114x114 icon for iphones and ipads -->
+	<!-- Other link Tags -->
 	<link rel="copyright" href="#copyright" />
 	<link rel="alternate" type="application/rss+xml" title="<?php bloginfo('name'); ?> RSS Feed" href="<?php bloginfo('rss2_url'); ?>" />
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
-
-	<!-- BEGIN: IE Specific Hacks -->
-	<!--[if IE 8]><link rel="stylesheet" href="<?php bloginfo('template_url'); ?>/css/ie8.css" media="screen" /><![endif]-->
-	<!--[if IE 7]><link rel="stylesheet" href="<?php bloginfo('template_url'); ?>/css/ie7.css" media="screen" /><![endif]-->
-	<!--END: IE Specific Hacks-->
-
-	<!--REMOVE this viewport code if you are making a site that is NOT responsive-->
-	<?php if ($iphone == true || $android == true || $ipad == true) : ?>
-		<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;" />
-	<?php endif; ?>
- 	<!--REMOVE this viewport code if you are making a site that is NOT responsive-->
 
 	<?php wp_head(); // wp_head hook for Plugins ~ always keep this just before the /head tag ?>
 </head>

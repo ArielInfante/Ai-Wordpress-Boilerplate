@@ -9,8 +9,8 @@ Author URI: www.arielinfante.com
 
 /*
 	--- Color References ---
-	link blue: #39C;
-	background: #XXXXXX;
+	main color: #000;
+	background: #fff;
 	more colors: #XXXXXX;
 */
 /*--------- Embeded Content from URL will Follow these rules ----------*/
@@ -34,18 +34,19 @@ pre { margin: 1em; }
 /*--- CONTENT AREA ---*/
 
 #content { }
-#content em { font-style: italic; }
+#content strong { font-weight:bold;}
+#content em { font-style:italic; }
 
-/* Page Nav */
+/*--- Page Nav ---*/
 
-/* Page */
+/*--- Page ---*/
 
-/* Posts */
+/*--- Posts ---*/
 
-/* Single */
+/*--- Single ---*/
 
 
-/*--- SIDEBAR ~ MAIN ---*/
+/*--- SIDEBAR ---*/
 
 
 /*--- FOOTER ---*/
