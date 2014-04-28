@@ -167,7 +167,7 @@ add_action('wp_footer', 'add_google_analytics');
 *
 *************************************************/
 function add_viewport() {
-    if(is_mobile() || is_android() || is_iphone() || is_ipad() || is_ipod()) {
+    if(is_mobile() || is_iphone() || is_ipad() || is_ipod()) {
         echo '<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;" />';
     }
 }
