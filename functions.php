@@ -212,8 +212,10 @@ add_action('wp_head', 'the_favicon');
 *
 *************************************************/
 function enqueue_css_sheets() {
+    wp_register_style('mainstyle', get_stylesheet_directory_uri() . '/style.css', 'style');
     wp_register_style('aireset', get_stylesheet_directory_uri() . '/css/aireset.min.css', 'style');
     wp_register_style('aigrid', get_stylesheet_directory_uri() . '/css/aigrid.css', 'style');
+    wp_enqueue_style('mainstyle');
     wp_enqueue_style('aireset');
     wp_enqueue_style('aigrid');
 
