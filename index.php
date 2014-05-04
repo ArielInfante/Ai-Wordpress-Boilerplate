@@ -24,10 +24,10 @@
 				<footer id="post-meta-data">
 					<div class="add-comment"><?php comments_popup_link('Share your comments', '1 Comment', '% Comments'); ?></div>
 					<?php if(has_category()) { ?>
-						<p class="meta-category">Category: <?php the_category(', ') ?></p>
+						<p class="meta-category">Category: <?php the_category(', '); ?></p>
 					<?php } ?>
 					<?php if(has_tags()) { ?>
-						<p class="meta-tags"><?php the_tags('Tags: ', ', ', '<br />'); ?></p>
+						<p class="meta-tags">Tags: <?php the_tags('<span>#', '</span>, <span>#', '</span>'); ?></p>
 					<?php } ?>
 				</footer>
 

@@ -27,7 +27,7 @@
 					<div class="add-comment"><?php comments_popup_link('Share Your Comments', '1 Comment', '% Comments'); ?></div>
 					<div><?php edit_post_link('[Edit]', '<small>', '</small>'); ?></div>
 					<?php if(has_tags()) { ?>
-						<div><?php the_tags('Tags: ', ', ', '<br />'); ?></div>
+						<p class="meta-tags">Tags: <?php the_tags('<span>#', '</span>, <span>#', '</span>'); ?></p>
 					<?php } ?>
 				</footer>
 				<!--END: Post Meta Data-->
