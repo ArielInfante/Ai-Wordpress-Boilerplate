@@ -42,10 +42,10 @@ add_action('after_setup_theme', 'the_language_setup');
 function register_the_menus() {
     register_nav_menus(
         array(
-            'header-menu' => __( 'Header Menu' ), // In header.php
-            'footer-menu' => __( 'Footer Menu' ), // In footer.php
-            'sidebar-menu' => __( 'Sidebar Menu' ), // In sidebar.php
-            'utility-menu' => __( 'Utility Menu' ) // Place wp_nav_menu in location of choice
+            'header' => __( 'Header Menu' ), // In header.php
+            'footer' => __( 'Footer Menu' ), // In footer.php
+            'sidebar' => __( 'Sidebar Menu' ), // In sidebar.php
+            'utility' => __( 'Utility Menu' ) // Place wp_nav_menu in location of choice
         )
     );
 }
@@ -93,13 +93,13 @@ function get_the_custom_excerpt($length){
 *************************************************/
 if ( function_exists('register_sidebar') ) {
     register_sidebar(array(
-        'id' => 'main-sidebar',
+        'id' => 'sidebar-main',
         'name' => 'Main Sidebar',
         'description' => 'The First Sidebar.',
         'before_widget' => '<div id="%1$s" class="widget %2$s">',
         'after_widget' => '</div>',
         'before_title' => '<h4 class="widgetTitle">',
-        'after_title' => '</h4>',
+        'after_title' => '</h4>'
     ));
 
     // // if you want to add more just keep adding them like this:

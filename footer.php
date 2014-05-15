@@ -7,8 +7,8 @@
 	<!--BEGIN: Footer Nav-->
 	<nav role="navigation">
 		<?php
-			if(has_nav_menu('footer-menu')) { // Checks to see if you have created a footer menu
-				wp_nav_menu( array( 'theme_location' => 'footer-menu' ); // Displays the footer menu
+			if(has_nav_menu('footer')) { // Checks to see if you have created a footer menu
+				wp_nav_menu( array( 'theme_location' => 'footer' )); // Displays the footer menu
 			}
 		?>
 	</nav>

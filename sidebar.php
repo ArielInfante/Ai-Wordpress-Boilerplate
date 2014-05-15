@@ -3,12 +3,13 @@
 $disableSidebarMain = get_post_meta($post->ID, 'disableSidebarMain', $single = true);
 if ($disableSidebarMain !== 'true'): ?>
 
-    <aside id="sidebar-main">
-        <?php dynamic_sidebar('sidebar-main'); ?>
-
+    <aside id="main-sidebar" class="col-2-8">
         <?php
-            if(has_nav_menu('sidebar-menu')) { // Checks to see if you have an sidebar menu
-                wp_nav_menu( array( 'theme_location' => 'sidebar-menu' ); // Displays sidebar menu
+            $mainSidebar = 'main-sidebar';
+            dynamic_sidebar($mainSidebar);
+
+            if(has_nav_menu('sidebar')) { // Checks to see if you have an sidebar menu
+                wp_nav_menu( array( 'theme_location' => 'sidebar' ); // Displays sidebar menu
             }
          ?>
     </aside>

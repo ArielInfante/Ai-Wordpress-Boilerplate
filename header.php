@@ -34,8 +34,8 @@
 
 			<nav id="main-nav" role="navigation">
 				<?php
-					if(has_nav_menu('header-menu')) { // Checks to see if you have an header menu
-						wp_nav_menu( array( 'theme_location' => 'header-menu' ) ); // Displays header menu
+					if(has_nav_menu('header')) { // Checks to see if you have an header menu
+						wp_nav_menu( array( 'theme_location' => 'header' ) ); // Displays header menu
 					}
 				?>
 			</nav>
@@ -44,11 +44,11 @@
 		<?php // Checks if you have a Sidebar so that the content area could stretch 100%
 			$disableSidebarMain = get_post_meta($post->ID, 'disableSidebarMain', $single = true);
 			if ($disableSidebarMain !== 'true') {
-				$fullwidth = '';
+				$bodyWidth = ' col-6-8';
 			} else {
-				$fullwidth = ' full';
+				$bodyWidth = ' full';
 			}
 		?>
 
-		<div id="body-wrapper" class="group<?php echo $fullwidth; // Adds full width to the body-wrapper when there are is no sidebar ?>">
+		<div id="body-wrapper" class="group<?php echo $bodyWidth; // Adds full width to the body-wrapper when there are is no sidebar ?>">
 
