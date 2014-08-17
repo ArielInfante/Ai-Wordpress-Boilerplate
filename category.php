@@ -1,7 +1,7 @@
 <?php get_header(); ?>
 
 <!--BEGIN: Content-->
-<section id="content" class="group" role="main">
+<section id="content" class="col-6-8 group" role="main">
 
 	<?php if (have_posts()) : ?>
 
@@ -26,8 +26,8 @@
 					<div><?php the_time('M d, Y') ?> by <?php the_author(); ?></div>
 					<div class="add-comment"><?php comments_popup_link('Share Your Comments', '1 Comment', '% Comments'); ?></div>
 					<div><?php edit_post_link('[Edit]', '<small>', '</small>'); ?></div>
-					<?php if(has_tags()) { ?>
-						<p class="meta-tags">Tags: <?php the_tags('<span>#', '</span>, <span>#', '</span>'); ?></p>
+					<?php if(has_tag()) { ?>
+						<p class="meta-tag">Tags: <?php the_tags('<span>#', '</span>, <span>#', '</span>'); ?></p>
 					<?php } ?>
 				</footer>
 				<!--END: Post Meta Data-->

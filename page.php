@@ -1,14 +1,13 @@
 <?php get_header(); ?>
 
 <!--BEGIN: Content-->
-<section id="content" class="group" role="main">
+<section id="content" class="group <?php check_sidebar(); // Adds full width to the body-wrapper when there are is no sidebar ?>" role="main">
 
-	<?php if (have_posts()) : ?>
-
-		<?php while (have_posts()) : the_post(); //BEGIN: The Loop ?>
+	<?php if (have_posts()) :
+		while (have_posts()) : the_post(); //BEGIN: The Loop ?>
 
 			<!--BEGIN: Post-->
-			<article <?php post_class() ?> id="post-<?php the_ID(); ?>">
+			<article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
 
 				<header>
 					<h1><?php the_title(); ?></h1>
@@ -31,8 +30,8 @@
 			<?php if ( $wp_query->max_num_pages > 1 ) : // if there's more than one page turn on pagination ?>
 				<nav id="pagination" class="group">
 		        	<h1>Page Navigation</h1>
-			        <div class="next-link"><?php next_posts_link('Next Page') ?></div>
-			        <div class="prev-link"><?php previous_posts_link('Previous Page') ?></div>
+			        <div class="next-link"><?php next_posts_link('Next Page'); ?></div>
+			        <div class="prev-link"><?php previous_posts_link('Previous Page'); ?></div>
 		        </nav>
 			<?php endif; ?>
 			<!--END: Page Nav-->

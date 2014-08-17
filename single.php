@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 
-<section id="content" class="group" role="main">
+<section id="content" class="group <?php check_sidebar(); // Adds full width to the body-wrapper when there are is no sidebar ?>" role="main">
 
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
@@ -23,8 +23,8 @@
 			<?php if(has_category()) { ?>
 				<p class="meta-category">Category: <?php the_category(', '); ?></p>
 			<?php } ?>
-			<?php if(has_tags()) { ?>
-				<p class="meta-tags">Tags: <?php the_tags('<span>#', '</span>, <span>#', '</span>'); ?></p>
+			<?php if(has_tag()) { ?>
+				<p class="meta-tag">Tags: <?php the_tags('<span>#', '</span>, <span>#', '</span>'); ?></p>
 			<?php } ?>
 		</footer>
 		<!--END: Post Meta Data-->

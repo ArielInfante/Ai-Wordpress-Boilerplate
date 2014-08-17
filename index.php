@@ -1,20 +1,19 @@
 <?php get_header(); ?>
 
 <!--BEGIN: content -->
-<section id="content" class="group" role="main">
+<section id="content" class="group <?php check_sidebar(); // Adds full width to the body-wrapper when there are is no sidebar ?>" role="main">
 
 	<h1>Latest Posts</h1>
 
-	<?php if (have_posts()) : // BEGIN THE LOOP ?>
-
-		<?php while (have_posts()) : the_post(); //LOOPING through all the posts, we split onto two lines for clean indentation ?>
+	<?php if (have_posts()) : // BEGIN THE LOOP
+		while (have_posts()) : the_post(); //LOOPING through all the posts, we split onto two lines for clean indentation ?>
 
 			<article <?php post_class() ?> id="post-<?php the_ID(); ?>">
 
 				<header>
-					<h1><a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></h1>
+					<h1><a href="<?php the_permalink() ?>" rel="bookmark"><?php the_title(); ?></h1>
 					<time datetime="<?php the_time('r'); ?>" pubdate="pubdate"><?php the_time('M d, Y'); ?></time>
-					<p>by <?php the_author_link() ?></p>
+					<p>by <?php the_author_link(); ?></p>
 				</header>
 
 				<div class="entry">
@@ -26,7 +25,7 @@
 					<?php if(has_category()) { ?>
 						<p class="meta-category">Category: <?php the_category(', '); ?></p>
 					<?php } ?>
-					<?php if(has_tags()) { ?>
+					<?php if(has_tag()) { ?>
 						<p class="meta-tags">Tags: <?php the_tags('<span>#', '</span>, <span>#', '</span>'); ?></p>
 					<?php } ?>
 				</footer>
@@ -41,8 +40,8 @@
 			<?php if ( $wp_query->max_num_pages > 1 ) : // if there's more than one page turn on pagination ?>
 				<nav id="page-nav" class="group">
 		        	<h1>Page Navigation</h1>
-			        <div class="next-link"><?php next_posts_link('Next Page') ?></div>
-			        <div class="prev-link"><?php previous_posts_link('Previous Page') ?></div>
+			        <div class="next-link"><?php next_posts_link('Next Page'); ?></div>
+			        <div class="prev-link"><?php previous_posts_link('Previous Page'); ?></div>
 		        </nav>
 			<?php endif; ?>
 			<!--END: Page Nav-->

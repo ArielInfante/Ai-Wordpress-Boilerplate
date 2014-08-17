@@ -1,15 +1,4 @@
 <?php
-/*************************************************
-*
-*      Extends functions.php to checks which browser is currently being used
-*      If you do not want this function you could delete the line and also the files with 'browser-detection'
-*
-*************************************************/
-require_once('includes/php-browser-detection.php');
-
-// Hide Admin Bar(During Development)
-show_admin_bar( false );
-
 /*
 COMMENT FUNCTIONS:
 we usually use LiveFyre, Disqus, or Intense Debate for comments
@@ -93,12 +82,12 @@ function get_the_custom_excerpt($length){
 *************************************************/
 if ( function_exists('register_sidebar') ) {
     register_sidebar(array(
-        'id' => 'sidebar-main',
-        'name' => 'Main Sidebar',
-        'description' => 'The First Sidebar.',
+        'name' => __('Main Sidebar'),
+        'id' => 'main-sidebar',
+        'description' => 'The Main Sidebar.',
         'before_widget' => '<div id="%1$s" class="widget %2$s">',
         'after_widget' => '</div>',
-        'before_title' => '<h4 class="widgetTitle">',
+        'before_title' => '<h4 class="widget-title">',
         'after_title' => '</h4>'
     ));
 
@@ -121,7 +110,7 @@ function new_more_excerpt($more) {
     return '...<br /><br /><a href="' . get_permalink($post->ID) . '" class="read-more">read more</a>';
 
 }
-add_filter('excerpt_more', 'new_more_excerpt');
+// add_filter('excerpt_more', 'new_more_excerpt');
 
 // This function is used to get the slug of the page
 function get_the_slug() {
@@ -146,11 +135,27 @@ if(!isset($content_width))
 
 /*************************************************
 *
+*      Checks if there is a Sidebar on the Page
+*
+*************************************************/
+function check_sidebar() {
+    $disableSidebarMain = get_post_meta($post->ID, 'disableSidebarMain', $single = true);
+    if ($disableSidebarMain !== 'true') {
+        $checked_sidebar = 'col-6-8';
+    } else {
+        $checked_sidebar = 'full';
+    }
+    echo $checked_sidebar;
+}
+
+/*************************************************
+*
 *      Adds a backup title to the website if no title is entered
 *
 *************************************************/
 function backup_title() {}
-add_filter('wp_title', 'backup_title');
+// add_filter('wp_title', 'backup_title');
+
 /*************************************************
 *
 *      Adds Google Analytics to the theme at the footer
@@ -159,19 +164,19 @@ add_filter('wp_title', 'backup_title');
 function add_google_analytics() { ?>
     <!-- Insert the Google code here -->
 <?php }
-add_action('wp_footer', 'add_google_analytics');
+// add_action('wp_footer', 'add_google_analytics');
 
 /*************************************************
 *
 *      Adds the viewport Meta tag to the website
 *
 *************************************************/
-function add_viewport() {
+function add_custom_viewport() {
     if(is_mobile() || is_iphone() || is_ipad() || is_ipod()) {
-        echo '<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;" />';
+        echo '<meta name="viewport" content="width=device-width, initial-scale=1" >';
     }
 }
-add_action('wp_head', 'add_viewport');
+add_action('wp_head', 'add_custom_viewport');
 
 /*************************************************
 *
@@ -215,9 +220,11 @@ function enqueue_css_sheets() {
     wp_register_style('mainstyle', get_stylesheet_directory_uri() . '/style.css', 'style');
     wp_register_style('aireset', get_stylesheet_directory_uri() . '/css/aireset.min.css', 'style');
     wp_register_style('aigrid', get_stylesheet_directory_uri() . '/css/aigrid.css', 'style');
-    wp_enqueue_style('mainstyle');
+    // wp_register_style('mediaqueries', get_stylesheet_directory_uri() . '/css/mediaqueries.css', 'style');
     wp_enqueue_style('aireset');
     wp_enqueue_style('aigrid');
+    wp_enqueue_style('mainstyle');
+    // wp_enqueue_style('mediaqueries');
 
     if(is_ie(7)) {
         wp_register_style('ie7', get_stylesheet_directory_uri() . '/css/ie7.css', 'style');
@@ -245,11 +252,13 @@ function enqueue_js_scripts() {
         wp_enqueue_script('jquery');
     }
 
-    global $is_IE;
-    if($is_IE) {
+    if(is_ie()) {
         wp_register_script('html5shiv', get_template_directory_uri().'/js/html5shiv.min.js');
         wp_enqueue_script('html5shiv');
     }
+
+    wp_register_script('script', get_template_directory_uri() . '/js/script.js', '', '1.0.0', false);
+    wp_enqueue_script('script');
 }
 add_action('wp_enqueue_scripts', 'enqueue_js_scripts');
 
@@ -272,7 +281,8 @@ add_filter('admin_bar_menu', 'admin_bar_replace_howdy', 25);
 *************************************************/
 // Custom Stylesheet for Login
 function custom_login_stylesheet() {
-    wp_enqueue_style('login-head', 'css/login.css', false);
+    wp_register_style('login-head', get_stylesheet_directory_uri() . '/css/custom-login.css', 'style');
+    wp_enqueue_style('login-head');
 }
 add_action('login_enqueue_scripts', 'custom_login_stylesheet');
 
@@ -324,9 +334,20 @@ add_filter('login_redirect', 'admin_login_redirect', 10, 3);
 *      Customizable Logo on Top of Dashboard Page
 *
 *************************************************/
-function the_custom_logo() {
-    echo '<style type="text/css">#header-logo{background-image:url('.get_template_directory_uri().'/images/favicon/Name of file !important;}</style>';
-}
+// function the_custom_logo() {
+//     echo '<style type="text/css">#header-logo{background-image:url('.get_template_directory_uri().'/images/favicon/Name of file !important;}</style>';
+// }
+
+/*************************************************
+*
+*      Extends functions.php to checks which browser is currently being used
+*      If you do not want this function you could delete the line and also the files with 'browser-detection'
+*
+*************************************************/
+require_once('includes/php-browser-detection.php');
+
+// Hide Admin Bar(During Development)
+show_admin_bar( false );
 
 /*************************************************
 *

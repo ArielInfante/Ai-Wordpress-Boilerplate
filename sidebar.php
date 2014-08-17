@@ -1,18 +1,19 @@
-<?php // Checks if you have a Sidebar so that the content area could stretch 100%
+<?php // to disable this sidebar on a page by page basis just add a custom field to your page or post of disableSidebarMain = true
 
-$disableSidebarMain = get_post_meta($post->ID, 'disableSidebarMain', $single = true);
-if ($disableSidebarMain !== 'true'): ?>
+$mainSidebar = 'main-sidebar';
 
-    <aside id="main-sidebar" class="col-2-8">
+if (is_active_sidebar($mainSidebar)) { ?>
+
+    <aside id="main-sidebar" class="group col-2-8">
+
+        <?php dynamic_sidebar($mainSidebar); ?>
+
         <?php
-            $mainSidebar = 'main-sidebar';
-            dynamic_sidebar($mainSidebar);
-
             if(has_nav_menu('sidebar')) { // Checks to see if you have an sidebar menu
-                wp_nav_menu( array( 'theme_location' => 'sidebar' ); // Displays sidebar menu
+                wp_nav_menu( array( 'theme_location' => 'sidebar' ) ); // Displays sidebar menu
             }
-         ?>
+        ?>
     </aside>
 
-<?php endif; ?>
+<?php } ?>
 <!--END: sidebar~main-->

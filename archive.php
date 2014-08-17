@@ -1,7 +1,7 @@
 <?php get_header(); ?>
 
 <!--BEGIN: Content-->
-<section id="content" role="main">
+<section id="content" class="col-6-8 group" role="main">
 
 	<?php if (have_posts()) : ?>
 
@@ -37,7 +37,7 @@
 
 			<h2 id="post-<?php the_ID(); ?>"><a href="<?php the_permalink() ?>" rel="bookmark" title="Permanent Link to <?php the_title_attribute(); ?>"><?php the_title(); ?></a></h2>
 
-			<small><?php the_time('r') ?></small>
+			<small>by <?php the_author(); ?> <br> <?php the_time('M d, Y'); ?></small>
 
 			<div class="entry">
 				<?php the_content() ?>

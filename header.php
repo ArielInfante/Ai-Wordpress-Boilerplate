@@ -22,33 +22,40 @@
 </head>
 
 <!--see http://www.mimoymima.com/2010/03/lab/wordpress-body-tag/-->
-<body id="<?php $post_parent = get_post($post->post_parent); $parentSlug = $post_parent->post_name; if (is_category()) { echo "category-template"; } elseif (is_archive()) { echo "archive-template"; } elseif (is_search()) { echo "search-results"; } elseif (is_single()) { echo "single-template"; } elseif (is_tag()) { echo "tag-template"; } else { echo $parentSlug; } ?>" class="<?php global $wp_query; $template_name = get_post_meta( $wp_query->post->ID, '_wp_page_template', true ); $tn = str_replace(".php", "", $template_name); echo "template-".$tn." "; ?><?php if (is_category()) { echo 'category'; } elseif (is_search()) { echo 'search'; } elseif (is_tag()) { echo "tag"; } elseif (is_home()) { echo "home"; } elseif (is_404()) { echo "page404"; } else { echo $post->post_name; } ?>">
+<body id="<?php $post_parent = get_post($post->post_parent);
+				$parentSlug = $post_parent->post_name;
+				if (is_page('blog')) { echo "blog-template"; }
+				elseif (is_category()) { echo "category-template"; }
+				elseif (is_archive()) { echo "archive-template"; }
+				elseif (is_search()) { echo "search-results"; }
+				elseif (is_single()) { echo "single-template"; }
+				elseif (is_tag()) { echo "tag-template"; }
+				else { echo $parentSlug; } ?>"
 
-	<!--BEGIN: page~wrapper-->
+				class="<?php global $wp_query; $template_name = get_post_meta( $wp_query->post->ID, '_wp_page_template', true ); $tn = str_replace(".php", "", $template_name); echo "template-".$tn." "; ?>
+				<?php
+					if (is_category()) { echo 'category'; }
+					elseif (is_search()) { echo 'search'; }
+					elseif (is_tag()) { echo "tag"; }
+					elseif (is_home()) { echo "home"; }
+					elseif (is_404()) { echo "page404"; }
+					else { echo $post->post_name; }
+				?>">
+
+	<!--BEGIN: page-wrapper-->
 	<div id="page-wrapper" class="group">
 
-		<header id="header-wrapper" role="banner">
+		<header id="header-wrapper" class="group" role="banner">
 
 			<h1 id="site-title"><a href="/"><?php bloginfo('name'); ?></a></h1>
 			<h2 id="site-description"><?php bloginfo( 'description' ); ?></h2>
 
-			<nav id="main-nav" role="navigation">
-				<?php
-					if(has_nav_menu('header')) { // Checks to see if you have an header menu
-						wp_nav_menu( array( 'theme_location' => 'header' ) ); // Displays header menu
-					}
-				?>
-			</nav>
+			<?php
+				if(has_nav_menu('header')) { // Checks to see if you have an header menu
+					wp_nav_menu( array( 'theme_location' => 'header' ) ); // Displays header menu
+				}
+			?>
 		</header>
 
-		<?php // Checks if you have a Sidebar so that the content area could stretch 100%
-			$disableSidebarMain = get_post_meta($post->ID, 'disableSidebarMain', $single = true);
-			if ($disableSidebarMain !== 'true') {
-				$bodyWidth = ' col-6-8';
-			} else {
-				$bodyWidth = ' full';
-			}
-		?>
-
-		<div id="body-wrapper" class="group<?php echo $bodyWidth; // Adds full width to the body-wrapper when there are is no sidebar ?>">
-
+		<div id="body-wrapper" class="group">
+			<div class="grid group">
